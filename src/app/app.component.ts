@@ -38,6 +38,7 @@ export class AppComponent {
         reader.onload = (data) => {
           let csvData = reader.result;
           this.jsonFile = this.csvJSON(csvData);
+          this.dataSource = new MatTableDataSource<CSVRecord>(this.jsonFile);
           console.log(this.jsonFile)
         }
 
@@ -72,7 +73,6 @@ export class AppComponent {
       }
       console.log(result)
       return result; //JavaScript object
-      //return JSON.stringify(result); //JSON
   }
 
 
