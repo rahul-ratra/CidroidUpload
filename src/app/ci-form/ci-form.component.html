@@ -1,8 +1,5 @@
-<p>
-  ci-form works!
-</p>
-
-<input type="file" #fileImportInput name="File Upload" id="txtFileUpload" (change)="fileChangeListener($event)" accept=".csv" />
+<div></div>
+<input type="file" #fileImportInput name="File Upload" id="txtFileUpload"   (change)="fileChangeListener($event)" accept=".csv" />
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z10" align="center" width="500">
 
