@@ -12,7 +12,15 @@
     <input matInput #input maxlength="10" placeholder="Enter some input">
     <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
   </mat-form-field><br/>
-
+  <mat-form-field hintLabel="Max 10 character ">
+    <input matInput #input maxlength="10" placeholder="Enter some input">
+    <mat-hint align="end">{{input.value?.length || 0}}/20</mat-hint>
+  </mat-form-field><br/>
+  <mat-form-field hintLabel="Max 10 character ">
+    <input matInput #input maxlength="10" placeholder="Enter some input">
+    <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
+  </mat-form-field><br/>
+  <br>
 
   <label>Float label: </label>
     <mat-radio-group formControlName="floatLabel">
@@ -22,9 +30,10 @@
   </mat-radio-group><br/>
   <br>
   <br>
+
   <br>
   <button mat-fab>Submit!</button>
 
 </div>
-
 <app-ci-form></app-ci-form>
+
