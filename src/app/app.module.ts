@@ -4,16 +4,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { CiFormComponent } from './ci-form/ci-form.component';
 import { MaterialModule } from './shared/material.module';
+import { AppRoutingModule } from './/app-routing.module';
+import { UploadfileComponent } from './uploadfile/uploadfile.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CiFormComponent
+    CiFormComponent,
+    UploadfileComponent
   ],
   imports: [
     BrowserModule,
-    MaterialModule
+    MaterialModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

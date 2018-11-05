@@ -1,16 +1,10 @@
-import{Component}from'@angular/core';
-import {MatTableDataSource}from '@angular/material';
-import {SelectionModel}from '@angular/cdk/collections';
-import {ViewChild}from '@angular/core';
+import {Component} from '@angular/core';
+import {MatTableDataSource} from '@angular/material';
+import {SelectionModel} from '@angular/cdk/collections';
+import {ViewChild} from '@angular/core';
 
 
 
-const ELEMENT_DATA: CSVRecord[] = [
-{firstName: "Frank", lastName: "Riley", userName: "friley", "password": "changeme"},
-{firstName: "Steve", lastName: "Brannigan", userName: "sbrannigan", "password": "changeme"},
-{firstName: "Marie", lastName: "Ambrose", userName: "mambrose", "password": "changeme"},
-
-];
 
 @Component({
   selector: 'app-root',
@@ -20,71 +14,68 @@ const ELEMENT_DATA: CSVRecord[] = [
 
 export class AppComponent {
 
-  public jsonFile : CSVRecord[] = [];
+  public jsonFile: CSVRecord[] = [];
 
   @ViewChild('fileImportInput') fileImportInput: any;
 
   fileChangeListener($event: any): void {
 
-      var text = [];
-      var files = $event.srcElement.files;
+    var text = [];
+    var files = $event.srcElement.files;
 
-      if (this.isCSVFile(files[0])) {
+    if (this.isCSVFile(files[0])) {
 
-        var input = $event.target;
-        var reader = new FileReader();
-        reader.readAsText(input.files[0]);
+      var input = $event.target;
+      var reader = new FileReader();
+      reader.readAsText(input.files[0]);
 
-        reader.onload = (data) => {
-          let csvData = reader.result;
-          this.jsonFile = this.csvJSON(csvData);
-          this.dataSource = new MatTableDataSource<CSVRecord>(this.jsonFile);
-          console.log(this.jsonFile)
-        }
+      reader.onload = (data) => {
+        let csvData = reader.result;
+        this.jsonFile = this.csvJSON(csvData);
+        this.dataSource = new MatTableDataSource<CSVRecord>(this.jsonFile);
+        console.log(this.jsonFile);
+      };
 
-        reader.onerror = function() {
-          alert('Unable to read ' + input.files[0]);
-        };
+      reader.onerror = function () {
+        alert('Unable to read ' + input.files[0]);
+      };
 
-      } else {
-        alert("Please import valid .csv file.");
-        this.fileReset();
-      }
+    } else {
+      alert('Please import valid .csv file.');
+      this.fileReset();
+    }
   }
 
   public csvJSON(csv) {
-      var lines = csv.split("\n");
+    var lines = csv.split('\n');
+    var result = [];
+    var headers = lines[0].split(',');
 
-      var result = [];
+    for (var i = 1; i < lines.length; i++) {
 
-      var headers = lines[0].split(",");
+      var obj = {};
+      var currentline = lines[i].split(',');
 
-      for (var i = 1; i < lines.length; i++) {
-
-          var obj = {};
-          var currentline = lines[i].split(',');
-
-          for (var j = 0; j < headers.length; j++) {
-              obj[headers[j]] = currentline[j];
-          }
-
-          result.push(obj);
-
+      for (var j = 0; j < headers.length; j++) {
+        obj[headers[j]] = currentline[j];
       }
-      console.log(result)
-      return result; //JavaScript object
+
+      result.push(obj);
+
+    }
+    console.log(result);
+    return result;
   }
 
 
   // CHECK IF FILE IS A VALID CSV FILE
   isCSVFile(file: any) {
-    return file.name.endsWith(".csv");
+    return file.name.endsWith('.csv');
   }
 
 
-
   fileReset() {
-    this.fileImportInput.nativeElement.value = "";
+    this.fileImportInput.nativeElement.value = '';
     this.jsonFile = [];
   }
 
@@ -102,12 +93,12 @@ export class AppComponent {
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
   }
 }
 
-export class CSVRecord{
+export class CSVRecord {
 
   public firstName: any;
   public lastName: any;
@@ -115,8 +106,7 @@ export class CSVRecord{
   public password: any;
 
 
-  constructor()
-  {
+  constructor() {
 
   }
 }
